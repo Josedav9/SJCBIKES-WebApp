@@ -1,0 +1,10 @@
+.caja{
+  padding: 10px;
+  width: 50%;
+  overflow: hidden;
+  border: 1px solid #4080FF;
+  border-radius: 20px;
+}
+.separador{
+  margin-top: 20px;
+}

@@ -1,0 +1,17 @@
+agm-map{
+  height: 600px;
+  width: 100%;
+}
+
+.sidemenu{
+    background-color: rgba(99,98,98,0.7);
+    color: white;
+}
+
+.card-body{
+  background-color: rgba(99,98,98);
+}
+
+.block{
+  display: inline-block;
+}
