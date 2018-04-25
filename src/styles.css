@@ -31,3 +31,14 @@
 .separador{
   margin-top: 10px;
 }
+.puntero{
+  cursor: pointer;
+}
+.menu-bici{
+  overflow-y:scroll;
+  height:600px;
+  /*background:gray;*/
+  padding: 5px;
+  background-color: rgba(99,98,98,0.7);
+  color: white;
+}

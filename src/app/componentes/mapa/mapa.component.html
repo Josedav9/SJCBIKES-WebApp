@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row fadeIn">
   <div class="col">
     <agm-map  (mapRightClick)="crearMarcador($event)"
             [latitude]="lat" [longitude]="lng" [zoom]="zoom" >
@@ -21,19 +21,23 @@
       </agm-marker>
     </agm-map>
   </div>
-  <div class="col-sm-12 col-md-4 sidemenu">
+  <div class="col-sm-12 col-md-4 menu-bici">
     <h3>Estaciones</h3>
     <div *ngFor="let parqueadero of parqueaderosSnap | async;">
-      <button class="btn btn-outline-dark btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn btn-outline-dark btn-block" type="button" data-toggle="collapse" attr.data-target=#{{parqueadero.id}} aria-expanded="false" aria-controls="collapseExample">
         {{ parqueadero.nombre }}
         <span class="badge badge-light">{{ parqueadero.bicicletas.length }}</span>
       </button>
-      <div class="collapse" id="collapseExample">
+      <div class="collapse" id={{parqueadero.id}}>
         <div *ngFor="let bicicleta of parqueadero.bicicletas"
               class="card card-body">
               <p>{{ bicicleta }}</p>
               <button class="btn btn-outline-warning btn-block"
                     type="button" name="button">Tomar prestada</button>
+        </div>
+        <div class="card card-body">
+              <button class="btn btn-outline-primary btn-block"
+                    type="button" name="button">Ingresas bicicleta</button>
         </div>
       </div>
     </div>
@@ -57,7 +61,7 @@
         <div *ngIf="exito"
               class="alert alert-success"
               role="alert">
-            <strong>Se creo Exitosamente</strong>
+            <strong>Se Actualizo Exitosamente</strong>
         </div>
       </div>
       <div class="modal-footer">
