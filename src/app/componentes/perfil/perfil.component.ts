@@ -20,7 +20,8 @@ export class PerfilComponent implements OnInit {
     apellido:"",
     id:"",
     fNacimiento:null,
-    cedula:null
+    cedula:null,
+    prestada:null
   };
 
   constructor(private router:Router, public _fb:FirebaseService, private db:AngularFirestore ) {

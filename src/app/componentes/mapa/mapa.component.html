@@ -14,14 +14,14 @@
                     </p>
                     <span (click)="parqueaderoModal=parqueaderos"
                           data-toggle="modal" data-target="#exampleModal"
-                          class="badge badge-primary"><i class="fas fa-edit"></i> Editar</span>
+                          class="badge badge-primary puntero"><i class="fas fa-edit"></i> Editar</span>
                     <span (click)="eliminarMarcador( parqueaderos )"
-                          class="badge badge-danger"><i class="fas fa-trash"></i> Borrar marcador</span>
+                          class="badge badge-danger puntero"><i class="fas fa-trash"></i> Borrar marcador</span>
                   </agm-info-window>
       </agm-marker>
     </agm-map>
   </div>
-  <div class="col-sm-12 col-md-4 menu-bici">
+  <div class="col-sm-12 col-md-3 menu-bici">
     <h3>Estaciones</h3>
     <div *ngFor="let parqueadero of parqueaderosSnap | async;">
       <button class="btn btn-outline-dark btn-block" type="button" data-toggle="collapse" attr.data-target=#{{parqueadero.id}} aria-expanded="false" aria-controls="collapseExample">
@@ -29,14 +29,16 @@
         <span class="badge badge-light">{{ parqueadero.bicicletas.length }}</span>
       </button>
       <div class="collapse" id={{parqueadero.id}}>
-        <div *ngFor="let bicicleta of parqueadero.bicicletas"
+        <div *ngFor="let bicicleta of parqueadero.bicicletas; let i = index"
               class="card card-body">
               <p>{{ bicicleta }}</p>
-              <button class="btn btn-outline-warning btn-block"
+              <button (click) ="tomarPrestadaBicicleta( bicicleta, parqueadero, i )"
+                    class="btn btn-outline-warning btn-block"
                     type="button" name="button">Tomar prestada</button>
         </div>
         <div class="card card-body">
-              <button class="btn btn-outline-primary btn-block"
+              <button (click)="regresarBicicleta( parqueadero )"
+                    class="btn btn-outline-primary btn-block"
                     type="button" name="button">Ingresas bicicleta</button>
         </div>
       </div>

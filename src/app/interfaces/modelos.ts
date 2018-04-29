@@ -4,13 +4,14 @@ export interface Usuario {
   apellido:String,
   fNacimiento:String,
   lugarTrabajo?:String,
-  cedula:String
+  cedula:String,
+  prestada:string
 }
 
 export interface Bicicleta {
   id?:string,
-  idBicicleta:String,
-  prestada:boolean
+  idBicicleta:string,
+  prestada:string
 }
 
 export interface Parqueadero {
@@ -24,9 +25,9 @@ export interface Parqueadero {
 export interface Viaje {
   id?:string,
   horaPrestamo:Date,
-  horaDevolucion:Date,
+  horaDevolucion?:Date,
   parqueaderoOrigen:String,
-  parqueaderoDestino:String,
-  idBicicleta?:String
+  parqueaderoDestino?:String,
+  idBicicleta?:string
 
 }

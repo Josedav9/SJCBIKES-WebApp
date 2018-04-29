@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Parqueadero } from '../../interfaces/modelos';
+import { Parqueadero, Viaje, Usuario, Bicicleta } from '../../interfaces/modelos';
 import { Observable } from 'rxjs/Observable';
 import { FirebaseService } from '../../servicios/firebase.service';
 
@@ -23,6 +22,7 @@ export class MapaComponent implements OnInit {
     lng:null,
     bicicletas:[]
   };
+  viaje:Viaje;
   exito:boolean = false;
 
   constructor( public _fb:FirebaseService  ) {
@@ -66,7 +66,7 @@ export class MapaComponent implements OnInit {
     )
   }
 
-  actualizarParqueadero(){
+  actualizarParqueadero(): void{
     this._fb.actualizarParqueadero( this.parqueaderoModal ).then(
       resp =>{
         this.exito = true
@@ -76,6 +76,47 @@ export class MapaComponent implements OnInit {
         console.log(err)
       }
     )
+  }
+  tomarPrestadaBicicleta( bicicletaId:string, parqueadero:Parqueadero, inx:number ): void{
+  this._fb.tomarPrestadaBicicleta( bicicletaId, parqueadero ).then(
+      (res) => {
+        let viajes:Viaje = {
+          idBicicleta:bicicletaId,
+          parqueaderoOrigen:parqueadero.nombre,
+          horaPrestamo: new Date()
+        }
+        let usuario:Usuario = JSON.parse(localStorage.getItem('usuario'));
+        this._fb.usuarioCollection.doc( usuario.id )
+                  .collection('viajes').add( viajes ).then(
+                    (resp)=>{
+                      usuario.prestada = resp.id;
+                      localStorage.setItem('usuario', JSON.stringify(usuario));
+                      this._fb.usuarioCollection.doc( usuario.id ).update( usuario );
+                    }
+                  );
+        parqueadero.bicicletas.splice( inx, 1 );
+        this._fb.actualizarParqueadero( parqueadero );
+      }
+    ).catch();
+  }
+
+  regresarBicicleta( parqueadero:Parqueadero ):void{
+    let usuario =  JSON.parse(localStorage.getItem('usuario'));
+    this._fb.usuarioCollection.doc( usuario.id ).collection('viajes').doc<Viaje>( usuario.prestada ).valueChanges()
+        .subscribe( resp=>{
+          this.viaje = resp;
+          this.viaje.horaDevolucion = new Date();
+          this.viaje.parqueaderoDestino = parqueadero.nombre;
+          this._fb.regresarBicicleta( this.viaje );
+          parqueadero.bicicletas.push( this.viaje.idBicicleta );
+          this._fb.parqueaderosCollection.doc( parqueadero.id )
+                .update( {'bicicletas':parqueadero.bicicletas} );
+
+        })
+        this._fb.usuarioCollection.doc( usuario.id ).collection('viajes').doc( usuario.prestada )
+              .update( { 'horaDevolucion': new Date(), 'parqueaderoDestino': parqueadero.nombre  } );        
+
+
   }
 
   ngOnInit() {

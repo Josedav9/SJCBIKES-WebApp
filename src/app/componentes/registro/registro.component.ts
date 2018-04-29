@@ -17,6 +17,7 @@ export class RegistroComponent implements OnInit {
     apellido:"",
     cedula:"",
     fNacimiento:null,
+    prestada:null
   };
   email:string;
   password:string;
