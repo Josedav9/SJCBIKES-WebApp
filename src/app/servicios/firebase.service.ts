@@ -12,6 +12,7 @@ export class FirebaseService {
   bicicletasCollection:AngularFirestoreCollection<Bicicleta>;
 
   constructor( public fauth:AngularFireAuth, private db:AngularFirestore ) {
+    this.db.firestore.settings( { timestampsInSnapshots: true } );
     this.usuarioCollection = this.db.collection('usuarios')
     this.parqueaderosCollection = this.db.collection('parqueaderos')
     this.bicicletasCollection =  this.db.collection('bicicletas')
@@ -63,12 +64,13 @@ export class FirebaseService {
   }
 
   regresarBicicleta( viaje:Viaje ){
-    this.bicicletasCollection.doc<Bicicleta>( viaje.idBicicleta ).valueChanges()
+    this.bicicletasCollection.doc<Bicicleta>( viaje.idBicicleta )
+      .valueChanges()
           .subscribe( resp =>{
             let bicicleta:Bicicleta =  resp;
             this.bicicletasCollection.doc( viaje.idBicicleta ).collection('viajes')
               .doc<Viaje>(bicicleta.prestada).update( viaje );
-          } );
+          })
   }
 
 

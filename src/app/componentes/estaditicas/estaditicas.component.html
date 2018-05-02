@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Estadisticas Del Sistema</h1>
+  <hr>
+  <h3>Lista de bicicletas</h3>
+  <hr>
+  <div class="list-group">
+  <a  (click)="verBicicleta( bicicleta.id )"
+      *ngFor="let bicicleta of bicicletas | async"
+      class="puntero list-group-item list-group-item-dark list-group-item-action">
+    {{ bicicleta.id }}
+  </a>
+  </div>
+  <br>
+  <div class="">
+    <h3>Matrices Origen Destino</h3>
+    <hr>
+    <button (click)="generarMatriz()"
+            type="button" name="button"> Hola </button>
+  </div>
+</div>

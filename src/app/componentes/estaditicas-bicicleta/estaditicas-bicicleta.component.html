@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Estaditicas de la Bicicleta</h1>
+  <hr>
+  <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Origen</th>
+      <th scope="col">Destino</th>
+      <th scope="col">Fecha Prestamos</th>
+      <th scope="col">Fecha Devolucion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let viaje of viajes | async">
+      <td>{{viaje.parqueaderoOrigen}}</td>
+      <td>{{viaje.parqueaderoDestino}}</td>
+      <td>{{viaje.horaPrestamo}}</td>
+      <td>{{viaje.horaDevolucion}}</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>

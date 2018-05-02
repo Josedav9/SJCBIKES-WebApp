@@ -24,6 +24,8 @@ import { AgmCoreModule } from '@agm/core';
 //Rutas
 import { APP_ROUTING } from './app.routes';
 import { MapaComponent } from './componentes/mapa/mapa.component';
+import { EstaditicasComponent } from './componentes/estaditicas/estaditicas.component';
+import { EstaditicasBicicletaComponent } from './componentes/estaditicas-bicicleta/estaditicas-bicicleta.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { MapaComponent } from './componentes/mapa/mapa.component';
     FooterComponent,
     PerfilComponent,
     RegistroComponent,
-    MapaComponent
+    MapaComponent,
+    EstaditicasComponent,
+    EstaditicasBicicletaComponent
   ],
   imports: [
     BrowserModule,

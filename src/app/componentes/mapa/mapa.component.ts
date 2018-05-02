@@ -111,10 +111,11 @@ export class MapaComponent implements OnInit {
           parqueadero.bicicletas.push( this.viaje.idBicicleta );
           this._fb.parqueaderosCollection.doc( parqueadero.id )
                 .update( {'bicicletas':parqueadero.bicicletas} );
+          this._fb.usuarioCollection.doc( usuario.id ).update( { 'prestada':null } );
 
         })
         this._fb.usuarioCollection.doc( usuario.id ).collection('viajes').doc( usuario.prestada )
-              .update( { 'horaDevolucion': new Date(), 'parqueaderoDestino': parqueadero.nombre  } );        
+              .update( { 'horaDevolucion': new Date(), 'parqueaderoDestino': parqueadero.nombre  } );
 
 
   }
