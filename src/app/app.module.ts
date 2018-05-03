@@ -26,6 +26,7 @@ import { APP_ROUTING } from './app.routes';
 import { MapaComponent } from './componentes/mapa/mapa.component';
 import { EstaditicasComponent } from './componentes/estaditicas/estaditicas.component';
 import { EstaditicasBicicletaComponent } from './componentes/estaditicas-bicicleta/estaditicas-bicicleta.component';
+import { DiferenciaPipePipe } from './pipes/diferencia-pipe.pipe';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { EstaditicasBicicletaComponent } from './componentes/estaditicas-bicicle
     RegistroComponent,
     MapaComponent,
     EstaditicasComponent,
-    EstaditicasBicicletaComponent
+    EstaditicasBicicletaComponent,
+    DiferenciaPipePipe
   ],
   imports: [
     BrowserModule,
